@@ -2,12 +2,20 @@
 
 import { useUserStore } from '../store/user.js'
 
-const { users, fetchUsers } = useUserStore();
+const { users, fetchUsers, removeUser } = useUserStore();
 
 try {
-  await fetchUsers();
+  fetchUsers();
 } catch (error) {
   console.error('Error fetching users:', error);
+}
+async function handleDeleteUser(userId) {
+  try {
+    await removeUser(userId);
+    await fetchUsers(); // Refresh the user list after deletion
+  } catch (error) {
+    console.error('Error deleting user:', error);
+  }
 }
 
 </script>
@@ -30,7 +38,7 @@ try {
         <td>{{ user.emailAdress }}</td>
         <td>
           <button class="btn btn-primary">Edit</button>
-          <button class="btn btn-danger" @click="handleDeleteUser()">Delete</button>
+          <button class="btn btn-danger" @click="handleDeleteUser(user.id)">Delete</button>
         </td>
       </tr>
     </tbody>

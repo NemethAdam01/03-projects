@@ -1,5 +1,5 @@
 import { ref } from 'vue';
-import { getUsers, deleteUser } from '../api/userAPI.js';
+import { getUsers, deleteUser } from '../apis/userAPI.js';
 const users = ref([]);
 export function useUserStore() {
     async function fetchUsers() {
