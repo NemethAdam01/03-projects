@@ -11,8 +11,12 @@ try {
 }
 async function handleDeleteUser(userId) {
   try {
-    await removeUser(userId);
-    await fetchUsers(); // Refresh the user list after deletion
+    const confirm = confirm("Are you sure?");
+    if (confirm) {
+      await removeUser(userId);
+      await fetchUsers(); // Refresh the user list after deletion
+    }
+
   } catch (error) {
     console.error('Error deleting user:', error);
   }
@@ -46,6 +50,4 @@ async function handleDeleteUser(userId) {
 
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
