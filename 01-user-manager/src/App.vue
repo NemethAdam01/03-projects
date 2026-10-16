@@ -2,8 +2,15 @@
 import { ref } from 'vue'
 import { onMounted } from 'vue'
 import { getUsers } from '../apis/userAPI.js'
+import { useUserStore } from '../store/user.js'
 
-const users = ref([]);
+const { users, fetchUsers } = useUserStore();
+
+try {
+  await fetchUsers();
+} catch (error) {
+  console.error('Error fetching users:', error);
+}
 
 onMounted(async () => {
   users.value = await getUsers();
