@@ -7,4 +7,8 @@ export async function getUsers() {
     return response.data;
 }
 
+export async function deleteUser(Id) {
+    const response = await apiClient.delete(`${urlFragment}/${Id}`);
+}
+
     
